@@ -2,8 +2,6 @@
   'use strict';
 
   var STORAGE_KEY = 'url-qr-generator';
-  var TYPES = ['url', 'wifi'];
-  var SECURITIES = ['WPA', 'WEP', 'nopass'];
   // Output is fixed: navy modules on pale blue, level H, a 4-module quiet zone, ~1024 px PNG, fox at 28% width.
   var OUTPUT = { level: 'H', margin: 4, dark: '#0a1630', light: '#e6f0ff', size: 1024, logoSize: 28 };
   var MODE_LABEL = { byte: '位元組', alphanumeric: '英數', numeric: '數字' };
@@ -25,10 +23,7 @@
 
   var $ = function (id) { return document.getElementById(id); };
   var el = {
-    formUrl: $('form-url'), formWifi: $('form-wifi'),
     url: $('url-input'), urlNotes: $('url-notes'), encodeUri: $('encode-uri'),
-    ssid: $('wifi-ssid'), password: $('wifi-password'), passwordField: $('wifi-password-field'),
-    togglePassword: $('toggle-password'), hidden: $('wifi-hidden'), wifiNotes: $('wifi-notes'),
     sizeNote: $('size-note'),
     image: $('qr-image'), placeholder: $('qr-placeholder'), status: $('status-chip'),
     sticker: $('sticker'), scanline: $('scanline'),
@@ -86,43 +81,24 @@
     el.legend.appendChild(li);
   });
 
-  function checkedValue(name, fallback) {
-    var checked = document.querySelector('input[name="' + name + '"]:checked');
-    return checked ? checked.value : fallback;
-  }
-
   function readSaved() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) { return {}; }
   }
 
-  // Only the form is saved, never the Wi-Fi password.
+  // Writing the whole record also drops Wi-Fi fields left by older versions of the page.
   function save(s) {
-    var stored = { type: s.type, url: s.url, ssid: s.ssid, security: s.security, hidden: s.hidden, structure: s.structure };
+    var stored = { url: s.url, structure: s.structure };
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored)); } catch (e) { /* storage unavailable */ }
   }
 
   function restore() {
     var s = readSaved();
-    var linked = location.hash.slice(1);
-    var type = TYPES.indexOf(linked) >= 0 ? linked : s.type;
-    if (TYPES.indexOf(type) >= 0) $('type-' + type).checked = true;
     if (typeof s.url === 'string') el.url.value = s.url;
-    if (typeof s.ssid === 'string') el.ssid.value = s.ssid;
-    if (SECURITIES.indexOf(s.security) >= 0) $('security-' + s.security).checked = true;
-    el.hidden.checked = s.hidden === true;
     el.structure.checked = s.structure === true;
   }
 
   function collect() {
-    return Object.assign({
-      type: checkedValue('type', 'url'),
-      url: el.url.value,
-      ssid: el.ssid.value,
-      password: el.password.value,
-      security: checkedValue('security', 'WPA'),
-      hidden: el.hidden.checked,
-      structure: el.structure.checked
-    }, OUTPUT);
+    return Object.assign({ url: el.url.value, structure: el.structure.checked }, OUTPUT);
   }
 
   function slug(value) {
@@ -139,36 +115,20 @@
     });
   }
 
-  // Each content type turns its form into the text to encode and what the preview should say about it.
-  var builders = {
-    url: function (s) {
-      var url = Payloads.url(s.url);
-      renderNotes(el.urlNotes, url.notes);
-      el.encodeUri.hidden = !url.encoded;
-      el.encodeUri.dataset.value = url.encoded || '';
-      var host = slug(url.host);
-      return {
-        text: url.text,
-        missing: '輸入網址後，QR 碼會出現在這裡。',
-        display: url.text,
-        alt: 'QR 碼，內容是 ' + url.text,
-        filename: host ? 'qr-' + host : 'qr-code'
-      };
-    },
-    wifi: function (s) {
-      var wifi = Payloads.wifi(s);
-      el.passwordField.hidden = s.security === 'nopass';
-      renderNotes(el.wifiNotes, wifi.notes);
-      var name = slug(s.ssid);
-      return {
-        text: wifi.text,
-        missing: wifi.missing,
-        display: el.password.type === 'text' ? wifi.text : wifi.masked,
-        alt: 'Wi-Fi QR 碼，網路名稱是 ' + s.ssid,
-        filename: name ? 'wifi-' + name : 'wifi-qr'
-      };
-    }
-  };
+  // Turns the form into the text to encode and what the preview should say about it.
+  function build(s) {
+    var url = Payloads.url(s.url);
+    renderNotes(el.urlNotes, url.notes);
+    el.encodeUri.hidden = !url.encoded;
+    el.encodeUri.dataset.value = url.encoded || '';
+    var host = slug(url.host);
+    return {
+      text: url.text,
+      missing: '輸入網址後，QR 碼會出現在這裡。',
+      alt: 'QR 碼，內容是 ' + url.text,
+      filename: host ? 'qr-' + host : 'qr-code'
+    };
+  }
 
   function moduleScale(total, target) {
     return Math.max(1, Math.round(target / total));
@@ -340,13 +300,11 @@
     var s = collect();
     save(s);
 
-    el.formUrl.hidden = s.type !== 'url';
-    el.formWifi.hidden = s.type !== 'wifi';
     el.legend.hidden = !s.structure;
     el.budget.hidden = true;
 
-    var built = builders[s.type](s);
-    el.payload.textContent = built.text ? built.display : '–';
+    var built = build(s);
+    el.payload.textContent = built.text || '–';
     if (!built.text) {
       showPlaceholder(built.missing);
       return;
@@ -458,19 +416,8 @@
     el.url.focus();
   });
 
-  el.togglePassword.addEventListener('click', function () {
-    var show = el.password.type === 'password';
-    el.password.type = show ? 'text' : 'password';
-    el.togglePassword.textContent = show ? '隱藏' : '顯示';
-    el.togglePassword.setAttribute('aria-pressed', String(show));
-    render();
-  });
-
-  [el.url, el.ssid, el.password].forEach(function (input) { input.addEventListener('input', schedule); });
-  [el.structure, el.hidden].forEach(function (input) { input.addEventListener('change', schedule); });
-  document.querySelectorAll('input[name="type"], input[name="security"]').forEach(function (input) {
-    input.addEventListener('change', schedule);
-  });
+  el.url.addEventListener('input', schedule);
+  el.structure.addEventListener('change', schedule);
 
   restore();
   render();
