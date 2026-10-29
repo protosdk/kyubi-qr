@@ -82,18 +82,19 @@ One-time setup: in the repository's **Settings → Pages**, set **Source** to **
 
 ```
 site/
-  index.html       page markup
-  css/style.css    styles
-  js/qr.js         QR encoder (also loadable from Node)
-  js/payloads.js   URL payload builder
-  js/app.js        page logic: rendering, fox placement, downloads
-  assets/          fox picture and icons (not Apache-licensed, see below)
-tests/             node:test suites
-tools/             macOS Vision round-trip check
+  index.html            page markup and search/link-preview metadata
+  manifest.webmanifest  name and icons for adding the page to a home screen
+  css/style.css         styles
+  js/qr.js              QR encoder (also loadable from Node)
+  js/payloads.js        URL payload builder
+  js/app.js             page logic: rendering, fox placement, downloads
+  assets/               fox picture, icons and link-preview image (not Apache-licensed, see below)
+tests/                  node:test suites
+tools/                  macOS Vision round-trip check
 ```
 
 ## License
 
 The code is licensed under the [Apache License 2.0](LICENSE).
 
-The fox picture (`site/assets/fox.jpg`, `fox-64.png`, `fox-180.png`) and the README banner made from it (`.github/banner.png`) are **not** covered by that license. All rights are reserved, and they're included only so the official site and this README can show them. If you fork this project, replace those files with your own pictures. See [NOTICE](NOTICE).
+The fox picture and every image made from it (all files in `site/assets/`, and the README banner `.github/banner.png`) are **not** covered by that license. All rights are reserved, and they're included only so the official site and this README can show them. If you fork this project, replace those files with your own pictures. See [NOTICE](NOTICE).
