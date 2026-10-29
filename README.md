@@ -1,4 +1,4 @@
-<img src="site/assets/fox-180.png" width="96" height="96" alt="">
+<img src=".github/banner.png" alt="QB Code: the blue cyber fox beside the words QB Code, joined by glowing circuit lines">
 
 # QB Code
 
@@ -96,4 +96,4 @@ tools/             macOS Vision round-trip check
 
 The code is licensed under the [Apache License 2.0](LICENSE).
 
-The fox picture (`site/assets/fox.jpg`, `fox-64.png`, `fox-180.png`) is **not** covered by that license. All rights are reserved, and it's included only so the official site can show it. If you fork this project, replace those files with your own picture. See [NOTICE](NOTICE).
+The fox picture (`site/assets/fox.jpg`, `fox-64.png`, `fox-180.png`) and the README banner made from it (`.github/banner.png`) are **not** covered by that license. All rights are reserved, and they're included only so the official site and this README can show them. If you fork this project, replace those files with your own pictures. See [NOTICE](NOTICE).
