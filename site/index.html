@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>QB Code｜免費網址 QR Code 產生器，碼狸全開</title>
-<meta name="description" content="免費的網址 QR Code 產生器。貼上網址，馬上得到中間有九尾狐的 QR 碼，可下載 PNG、SVG 或直接複製圖片。不用註冊，全部在瀏覽器裡計算，網址不會上傳到任何伺服器。">
+<meta name="description" content="免費的網址 QR Code 產生器，貼上網址碼上就好。由九尾狐航，掃得出來狸所當然；PNG、SVG 下載或複製，有狐同享。不用註冊，全在瀏覽器裡算好，網址不會上傳到任何伺服器。">
 <link rel="canonical" href="https://protosdk.github.io/kyubi-qr/">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0A1630">
@@ -21,17 +21,17 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:url" content="https://protosdk.github.io/kyubi-qr/">
 <meta property="og:title" content="QB Code｜免費網址 QR Code 產生器，碼狸全開">
-<meta property="og:description" content="貼上網址，馬上得到中間有小狐狸的 QR Code。免費、不用註冊，全部在瀏覽器裡計算。">
+<meta property="og:description" content="貼上網址，QR Code 碼上就好。由九尾狐航，掃得出來狸所當然。免費、不用註冊，有狐同享。">
 <meta property="og:image" content="https://protosdk.github.io/kyubi-qr/assets/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="藍色的賽博小狐狸和 QB Code 字樣，以發光的電路線相連">
+<meta property="og:image:alt" content="藍色的賽博九尾狐和 QB Code 字樣，以發光的電路線相連">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="QB Code｜免費網址 QR Code 產生器，碼狸全開">
-<meta name="twitter:description" content="貼上網址，馬上得到中間有小狐狸的 QR Code。免費、不用註冊，全部在瀏覽器裡計算。">
+<meta name="twitter:description" content="貼上網址，QR Code 碼上就好。由九尾狐航，掃得出來狸所當然。免費、不用註冊，有狐同享。">
 <meta name="twitter:image" content="https://protosdk.github.io/kyubi-qr/assets/og-image.jpg">
-<meta name="twitter:image:alt" content="藍色的賽博小狐狸和 QB Code 字樣，以發光的電路線相連">
+<meta name="twitter:image:alt" content="藍色的賽博九尾狐和 QB Code 字樣，以發光的電路線相連">
 
 <!-- Search engines read this description of the tool. -->
 <script type="application/ld+json">
@@ -41,7 +41,7 @@
   "name": "QB Code",
   "alternateName": "九尾狐 QR Code 產生器",
   "url": "https://protosdk.github.io/kyubi-qr/",
-  "description": "免費的網址 QR Code 產生器。貼上網址，馬上得到中間有小狐狸的 QR 碼，可下載 PNG、SVG 或直接複製圖片。全部在瀏覽器裡計算。",
+  "description": "免費的網址 QR Code 產生器，貼上網址碼上就好。由九尾狐航，掃得出來狸所當然；PNG、SVG 下載或複製，有狐同享。全在瀏覽器裡算好。",
   "image": "https://protosdk.github.io/kyubi-qr/assets/og-image.jpg",
   "inLanguage": "zh-Hant",
   "applicationCategory": "UtilitiesApplication",
@@ -49,7 +49,7 @@
   "browserRequirements": "Requires JavaScript",
   "isAccessibleForFree": true,
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
-  "featureList": ["網址轉 QR Code", "中間放小狐狸，不影響掃描", "下載 PNG 與 SVG", "複製圖片"]
+  "featureList": ["網址轉 QR Code，碼上就好", "九尾狐航：放上九尾狐也掃得出來，狸所當然", "PNG、SVG 下載，有狐同享", "一鍵複製圖片"]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,7 +65,7 @@
       <div class="masthead-text">
         <p class="eyebrow">九尾 kyū·bi → Q·B</p>
         <h1 class="wordmark"><span class="glitch" data-text="QB">QB</span> Code</h1>
-        <p class="lede">九尾狐的 QR 碼產生器。貼上網址，馬上得到中間有小狐狸、可以列印或分享的 QR 碼。全部在瀏覽器裡計算，資料不會送到任何伺服器。</p>
+        <p class="lede">九尾狐的 QR 碼產生器，碼狸全開。貼上網址碼上就好，由九尾狐航，掃得出來狸所當然；要列印、要分享，有狐同享。全在瀏覽器裡算好，資料不會送到任何伺服器。</p>
       </div>
     </div>
     <svg class="circuit" viewBox="0 0 220 90" aria-hidden="true">
@@ -100,7 +100,7 @@
         <div class="frame">
           <div class="screen">
             <img id="qr-image" alt="" hidden>
-            <div id="qr-placeholder" class="placeholder">輸入網址後，QR 碼會出現在這裡。</div>
+            <div id="qr-placeholder" class="placeholder">貼上網址，QR 碼碼上出現在這裡。</div>
             <span id="scanline" class="scanline" aria-hidden="true"></span>
           </div>
         </div>
@@ -131,7 +131,7 @@
           </div>
 
           <div id="logo-budget" class="capacity" hidden>
-            <div class="capacity-head"><span>小狐狸用掉的修正能力</span><span id="budget-text">–</span></div>
+            <div class="capacity-head"><span>九尾狐用掉的修正能力</span><span id="budget-text">–</span></div>
             <div class="meter"><div id="budget-bar"></div><i class="limit" style="left: 60%" title="安全上限 60%"></i></div>
             <p id="budget-note" class="note"></p>
           </div>
@@ -145,7 +145,7 @@
   </main>
 
   <footer class="colophon">
-    <p>QB Code 是開源專案，原始碼在 <a href="https://github.com/protosdk/kyubi-qr">github.com/protosdk/kyubi-qr</a>，程式採 Apache-2.0 授權；小狐狸圖片保留所有權利，不在授權範圍內。</p>
+    <p>QB Code 是開源專案，原始碼在 <a href="https://github.com/protosdk/kyubi-qr">github.com/protosdk/kyubi-qr</a>，程式採 Apache-2.0 授權；九尾狐圖片保留所有權利，不在授權範圍內。</p>
   </footer>
 </div>
 
