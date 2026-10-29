@@ -64,13 +64,23 @@ Then open http://localhost:8000. Opening `site/index.html` straight from disk al
 npm test
 ```
 
-This needs Node.js 20 or later and nothing else. The tests cover known answers from the spec (capacity tables, all 32 format-information strings, the textbook `HELLO WORLD` codewords), symbol structure, the codeword map, the logo budget, and the URL payload.
+This needs Node.js 20 or later and nothing else. The tests cover known answers from the spec (capacity tables, all 32 format-information strings, the textbook `HELLO WORLD` codewords), symbol structure, the codeword map, the logo budget, the URL payload, and the font subset (below).
 
 On macOS there's also a round-trip check that renders 208 symbols (every version and level, every mask, and logo areas filled with random noise) and decodes them with Apple's Vision framework:
 
 ```bash
 npm run check:vision
 ```
+
+### Chinese font subset
+
+The Chinese font (Noto Sans TC) is requested from Google Fonts with only the characters the page uses, which cuts it from about 3 MB to about 360 KB. After changing any text in `site/index.html` or `site/js/`, run:
+
+```bash
+npm run fonts
+```
+
+`npm test` fails until you do, and lists the missing characters.
 
 ## Deploy
 
@@ -90,7 +100,7 @@ site/
   js/app.js             page logic: rendering, fox placement, downloads
   assets/               fox picture, icons and link-preview image (not Apache-licensed, see below)
 tests/                  node:test suites
-tools/                  macOS Vision round-trip check
+tools/                  macOS Vision round-trip check, font subset tool
 ```
 
 ## License
