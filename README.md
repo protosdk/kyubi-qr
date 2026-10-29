@@ -88,12 +88,15 @@ npm run fonts
 
 One-time setup: in the repository's **Settings → Pages**, set **Source** to **GitHub Actions**. On GitHub's free plan, Pages needs the repository to be public.
 
+To get the site into search results, add `https://protosdk.github.io/kyubi-qr/` to Google Search Console as a **URL prefix** property (a project site can't use DNS verification, so use the HTML tag method and put the tag in `site/index.html`), then submit `sitemap.xml` under **Sitemaps**. Bing Webmaster Tools can import the property from Search Console. There's no `robots.txt`: crawlers only read it from `protosdk.github.io/robots.txt`, and without one they may crawl everything.
+
 ## Project layout
 
 ```
 site/
   index.html            page markup and search/link-preview metadata
   manifest.webmanifest  name and icons for adding the page to a home screen
+  sitemap.xml           page list to submit to search engines
   css/style.css         styles
   js/qr.js              QR encoder (also loadable from Node)
   js/payloads.js        URL payload builder

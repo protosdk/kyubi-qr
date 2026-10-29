@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Submit this in Google Search Console and Bing Webmaster Tools. robots.txt can't point here because it would have to live at protosdk.github.io/robots.txt. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://protosdk.github.io/kyubi-qr/</loc>
+  </url>
+</urlset>
