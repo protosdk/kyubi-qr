@@ -2,7 +2,7 @@
 
 # QB Code
 
-A static QR code generator for URLs and Wi-Fi networks that puts a little cyber fox in the middle of every code, without making the code harder to read.
+A static QR code generator for URLs that puts a little cyber fox in the middle of every code, without making the code harder to read.
 
 The name is a pun: 九尾 (*kyū-bi*) is the nine-tailed fox of Japanese folklore, and *kyū-bi* sounds like the letters **Q·B**, so a nine-tailed fox's QR code is a QB code. The repository is called `kyubi-qr`.
 
@@ -10,12 +10,11 @@ The name is a pun: 九尾 (*kyū-bi*) is the nine-tailed fox of Japanese folklor
 
 ## 繁體中文簡介
 
-QB Code 是九尾狐的 QR 碼產生器：九尾（きゅうび，kyū-bi）唸起來就是 Q·B。貼上網址或填好 Wi-Fi 資料（網路名稱、密碼、加密方式），馬上得到中間有小狐狸、可以列印或分享的 QR 碼，並可下載 PNG 或 SVG。QR 編碼器完全自己實作，全部在瀏覽器裡計算，沒有後端伺服器，內容不會送到任何地方。小狐狸的大小由糾錯預算精確計算，不會讓 QR 碼讀不出來。
+QB Code 是九尾狐的 QR 碼產生器：九尾（きゅうび，kyū-bi）唸起來就是 Q·B。貼上網址，馬上得到中間有小狐狸、可以列印或分享的 QR 碼，並可下載 PNG 或 SVG。QR 編碼器完全自己實作，全部在瀏覽器裡計算，沒有後端伺服器，內容不會送到任何地方。小狐狸的大小由糾錯預算精確計算，不會讓 QR 碼讀不出來。
 
 ## Features
 
 - **URL**: adds `https://` when it's missing, and warns about addresses phones can't open or may misread.
-- **Wi-Fi**: WPA2/WPA3, WEP, open and hidden networks, in the `WIFI:` format phone cameras understand. Special characters are escaped, and passwords a router would reject get a warning.
 - **Fox in the centre**, sized so it uses at most 60% of the error correction (see below).
 - **Downloads**: PNG (about 1024 px) and SVG, plus copy-to-clipboard.
 - **Structure overlay** that colours the finder, timing and alignment patterns and the format and version information.
@@ -48,7 +47,7 @@ The values live in `OUTPUT` at the top of `site/js/app.js`.
 ## Privacy
 
 - Everything is computed in the browser. What you type is never sent anywhere.
-- The Wi-Fi password is never stored. The other form fields are kept in your browser's `localStorage` so they're still there next time.
+- The URL and the structure-overlay switch are kept in your browser's `localStorage` so they're still there next time.
 - The page loads its fonts from Google Fonts, so your browser requests the font files from Google. Nothing you type is part of those requests.
 
 ## Run locally
@@ -65,9 +64,9 @@ Then open http://localhost:8000. Opening `site/index.html` straight from disk al
 npm test
 ```
 
-This needs Node.js 20 or later and nothing else. The tests cover known answers from the spec (capacity tables, all 32 format-information strings, the textbook `HELLO WORLD` codewords), symbol structure, the codeword map, the logo budget, and the URL and Wi-Fi payloads.
+This needs Node.js 20 or later and nothing else. The tests cover known answers from the spec (capacity tables, all 32 format-information strings, the textbook `HELLO WORLD` codewords), symbol structure, the codeword map, the logo budget, and the URL payload.
 
-On macOS there's also a round-trip check that renders 212 symbols (every version and level, every mask, Wi-Fi codes, and logo areas filled with random noise) and decodes them with Apple's Vision framework:
+On macOS there's also a round-trip check that renders 208 symbols (every version and level, every mask, and logo areas filled with random noise) and decodes them with Apple's Vision framework:
 
 ```bash
 npm run check:vision
@@ -86,7 +85,7 @@ site/
   index.html       page markup
   css/style.css    styles
   js/qr.js         QR encoder (also loadable from Node)
-  js/payloads.js   URL and Wi-Fi payload builders
+  js/payloads.js   URL payload builder
   js/app.js        page logic: rendering, fox placement, downloads
   assets/          fox picture and icons (not Apache-licensed, see below)
 tests/             node:test suites

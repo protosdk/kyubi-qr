@@ -7,7 +7,6 @@ const path = require('path');
 const zlib = require('zlib');
 const { execFileSync } = require('child_process');
 const QR = require('../site/js/qr.js');
-const Payloads = require('../site/js/payloads.js');
 
 if (process.platform !== 'darwin') {
   console.log('Skipped: the Vision decoder needs macOS.');
@@ -81,13 +80,6 @@ for (let mask = 0; mask < 8; mask++) {
 add('numeric', '0123456789012345678901234567890123', { level: 'M' });
 add('alphanumeric', 'HTTPS://EXAMPLE.COM/AB', { level: 'M' });
 add('utf8', 'https://example.com/狐狸?q=背包', { level: 'M' });
-const wifi = [
-  { ssid: 'Fox-Den-Guest', password: 'sunny-fox-2026', security: 'WPA' },
-  { ssid: 'a;b,c:d\\e"f', password: 'p;w:d,1\\"x!', security: 'WPA' },
-  { ssid: 'Cafe Free', password: '', security: 'nopass', hidden: true },
-  { ssid: '狐狸的家', password: 'kitsune-2026', security: 'WPA' }
-];
-wifi.forEach((input, i) => add(`wifi${i}`, Payloads.wifi(input).text, { level: 'H' }));
 // Centre logo at the page's safety limit, filled with random modules: harsher than a real picture.
 for (const level of ['L', 'M', 'Q', 'H']) {
   for (const len of [20, 40, 60, 90, 130, 200, 300, 450]) {
