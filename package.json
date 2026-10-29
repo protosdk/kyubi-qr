@@ -1,0 +1,14 @@
+{
+  "name": "kyubi-qr",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QB Code: a static QR code generator for URLs and Wi-Fi with a nine-tailed fox in the middle. The encoder is written from scratch and runs in the browser.",
+  "license": "Apache-2.0",
+  "repository": "github:protosdk/kyubi-qr",
+  "homepage": "https://protosdk.github.io/kyubi-qr/",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check:vision": "node tools/vision-check.js",
+    "serve": "python3 -m http.server 8000 --directory site"
+  }
+}

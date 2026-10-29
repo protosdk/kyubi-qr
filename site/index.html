@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QB Code｜九尾狐 QR 碼產生器</title>
+<meta name="description" content="QB Code：九尾狐的 QR 碼產生器。貼上網址或填好 Wi-Fi 資料，馬上得到中間有小狐狸、可以列印或分享的 QR 碼。編碼全在瀏覽器裡計算。">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0A1630">
+<meta property="og:title" content="QB Code｜九尾狐 QR 碼產生器">
+<meta property="og:description" content="中間有小狐狸的 QR 碼產生器，編碼全在瀏覽器裡計算。">
+<meta property="og:image" content="https://protosdk.github.io/kyubi-qr/assets/fox-180.png">
+<link rel="icon" type="image/png" href="assets/fox-64.png">
+<link rel="apple-touch-icon" href="assets/fox-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div class="brand">
+      <div class="avatar" aria-hidden="true"><img src="assets/fox-180.png" alt="" width="64" height="64"></div>
+      <div class="masthead-text">
+        <p class="eyebrow">九尾 kyū·bi → Q·B</p>
+        <h1 class="wordmark"><span class="glitch" data-text="QB">QB</span> Code</h1>
+        <p class="lede">九尾狐的 QR 碼產生器。貼上網址或填好 Wi-Fi，馬上得到中間有小狐狸、可以列印或分享的 QR 碼。全部在瀏覽器裡計算，資料不會送到任何伺服器。</p>
+      </div>
+    </div>
+    <svg class="circuit" viewBox="0 0 220 90" aria-hidden="true">
+      <path class="dim" d="M4 70 H70 L96 44 H150"/>
+      <circle class="dim" cx="155" cy="44" r="5"/>
+      <path class="lit" d="M30 86 H120 L142 64 H200"/>
+      <circle class="lit" cx="205" cy="64" r="5"/>
+      <path class="lit" d="M92 24 H150 L170 4 H196"/>
+      <circle class="lit" cx="201" cy="4" r="4"/>
+      <path class="pulse" d="M30 86 H120 L142 64 H200"/>
+      <path class="pulse late" d="M4 70 H70 L96 44 H150"/>
+    </svg>
+  </header>
+
+  <main class="workspace">
+    <section class="panel input-panel" aria-labelledby="input-title">
+      <div class="input-head">
+        <h2 class="panel-title" id="input-title">內容</h2>
+        <div class="segmented type-switch" role="radiogroup" aria-label="內容類型">
+          <label><input type="radio" name="type" id="type-url" value="url" checked><span>網址</span></label>
+          <label><input type="radio" name="type" id="type-wifi" value="wifi"><span>Wi-Fi</span></label>
+        </div>
+      </div>
+
+      <div id="form-url" class="type-form">
+        <div class="field">
+          <label for="url-input">網址</label>
+          <input id="url-input" class="text-input" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" value="https://example.com/" placeholder="https://example.com/">
+        </div>
+        <ul id="url-notes" class="notes" aria-live="polite"></ul>
+        <button id="encode-uri" class="text-button" type="button" hidden>改用百分比編碼的網址</button>
+      </div>
+
+      <div id="form-wifi" class="type-form" hidden>
+        <div class="field">
+          <label for="wifi-ssid">網路名稱（SSID）</label>
+          <input id="wifi-ssid" class="text-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="例如 Fox-Den-Guest">
+        </div>
+        <fieldset class="field">
+          <legend>加密方式</legend>
+          <div class="segmented three">
+            <label><input type="radio" name="security" id="security-WPA" value="WPA" checked><span>WPA2／WPA3</span></label>
+            <label><input type="radio" name="security" id="security-WEP" value="WEP"><span>WEP</span></label>
+            <label><input type="radio" name="security" id="security-nopass" value="nopass"><span>不用密碼</span></label>
+          </div>
+          <p class="note">家用路由器大多是 WPA2 或 WPA3，較舊的 WPA 也選這個。只開 WPA3 的網路，較舊的 Android 手機可能連不上。</p>
+        </fieldset>
+        <div class="field" id="wifi-password-field">
+          <label for="wifi-password">密碼</label>
+          <div class="password-row">
+            <input id="wifi-password" class="text-input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="8 到 63 個字元">
+            <button id="toggle-password" class="button" type="button" aria-pressed="false" aria-controls="wifi-password">顯示</button>
+          </div>
+          <p class="note">密碼只用來產生 QR 碼，不會存在瀏覽器裡。</p>
+        </div>
+        <label class="toggle"><input id="wifi-hidden" type="checkbox">隱藏網路（路由器不廣播名稱）</label>
+        <ul id="wifi-notes" class="notes" aria-live="polite"></ul>
+        <p class="note">掃到這個 QR 碼的人都能連上這個網路。要貼在公共場所，建議用訪客網路。</p>
+      </div>
+    </section>
+
+    <section class="panel preview" aria-labelledby="preview-title">
+      <div class="preview-head">
+        <h2 class="panel-title" id="preview-title">輸出</h2>
+        <span id="status-chip" class="chip" aria-live="polite">等待輸入</span>
+      </div>
+      <div class="sticker" id="sticker">
+        <div class="frame">
+          <div class="screen">
+            <img id="qr-image" alt="" hidden>
+            <div id="qr-placeholder" class="placeholder">輸入網址後，QR 碼會出現在這裡。</div>
+            <span id="scanline" class="scanline" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="save-png" class="button primary" type="button">下載 PNG</button>
+        <button id="save-svg" class="button" type="button">下載 SVG</button>
+        <button id="copy-png" class="button" type="button">複製圖片</button>
+      </div>
+      <p id="action-note" class="note" aria-live="polite"></p>
+      <p class="payload">編碼內容：<code id="payload-text">–</code></p>
+
+      <details class="details">
+        <summary>技術細節</summary>
+        <div class="details-body">
+          <dl class="specs">
+            <div><dt>版本</dt><dd id="spec-version">–</dd></div>
+            <div><dt>模組數</dt><dd id="spec-size">–</dd></div>
+            <div><dt>模式</dt><dd id="spec-mode">–</dd></div>
+            <div><dt>遮罩</dt><dd id="spec-mask">–</dd></div>
+          </dl>
+
+          <div class="capacity">
+            <div class="capacity-head"><span>這個版本的容量</span><span id="capacity-text">–</span></div>
+            <div class="meter"><div id="capacity-bar"></div></div>
+            <p id="capacity-note" class="note"></p>
+          </div>
+
+          <div id="logo-budget" class="capacity" hidden>
+            <div class="capacity-head"><span>小狐狸用掉的修正能力</span><span id="budget-text">–</span></div>
+            <div class="meter"><div id="budget-bar"></div><i class="limit" style="left: 60%" title="安全上限 60%"></i></div>
+            <p id="budget-note" class="note"></p>
+          </div>
+
+          <p id="size-note" class="note"></p>
+          <label class="toggle"><input id="structure-toggle" type="checkbox">在預覽上標示 QR 碼結構</label>
+          <ul id="legend" class="legend" hidden></ul>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <p>QB Code 是開源專案，原始碼在 <a href="https://github.com/protosdk/kyubi-qr">github.com/protosdk/kyubi-qr</a>，程式採 Apache-2.0 授權；小狐狸圖片保留所有權利，不在授權範圍內。</p>
+  </footer>
+</div>
+
+<script src="js/qr.js"></script>
+<script src="js/payloads.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
