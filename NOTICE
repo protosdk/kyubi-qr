@@ -2,10 +2,11 @@ QB Code (kyubi-qr)
 Copyright 2026 The kyubi-qr Authors
 
 This product is licensed under the Apache License, Version 2.0 (see LICENSE),
-except for the fox picture described below.
+except for the fox pictures described below.
 
 The fox picture -- site/assets/fox.jpg, site/assets/fox-64.png and
-site/assets/fox-180.png -- is Copyright 2026 The kyubi-qr Authors. All rights
-reserved. It is NOT licensed under the Apache License. It is included only so
-that the official site can show it. If you fork or redistribute this project,
-replace these files with your own picture.
+site/assets/fox-180.png -- and the README banner made from it,
+.github/banner.png, are Copyright 2026 The kyubi-qr Authors. All rights
+reserved. They are NOT licensed under the Apache License. They are included
+only so that the official site and the README can show them. If you fork or
+redistribute this project, replace these files with your own pictures.
