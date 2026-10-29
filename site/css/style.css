@@ -268,6 +268,22 @@ label { font-weight: 500; }
 .legend li { display: flex; align-items: center; gap: 6px; }
 .legend i { width: 10px; height: 10px; border-radius: 2px; display: block; }
 
+/* FAQ: plain text below the tool, so search engines have something to read. */
+.faq { display: grid; gap: 16px; }
+.section-title {
+  display: flex; align-items: center; gap: 12px; margin: 0;
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 3vw, 24px); letter-spacing: 0.02em;
+}
+.section-title::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%; flex: none;
+  border: 2px solid var(--cyan); box-shadow: 0 0 8px var(--cyan-glow);
+}
+.faq-list { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .faq-list { grid-template-columns: minmax(0, 1fr); } }
+.faq-item { display: grid; gap: 8px; align-content: start; }
+.faq-item h3 { margin: 0; font-size: 16px; font-weight: 700; color: var(--cyan); }
+.faq-item p { margin: 0; font-size: 14px; line-height: 1.75; }
+
 .colophon { border-top: 1px solid var(--fur); padding-top: 16px; font-size: 13px; color: var(--haze); }
 .colophon p { margin: 0; max-width: 72ch; }
 .colophon a { color: var(--cyan); text-underline-offset: 3px; }
