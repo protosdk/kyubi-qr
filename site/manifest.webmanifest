@@ -1,7 +1,7 @@
 {
   "name": "QB Code｜碼狸全開的 QR Code 產生器",
   "short_name": "QB Code",
-  "description": "貼上網址，QR Code 碼上就好。由九尾狐航，掃得出來狸所當然。",
+  "description": "貼上網址，QR Code 碼上就好。印上九尾狐照樣掃得出來，狸所當然。",
   "lang": "zh-Hant",
   "start_url": "./",
   "scope": "./",
