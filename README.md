@@ -10,7 +10,7 @@ The name is a pun: 九尾 (*kyū-bi*) is the nine-tailed fox of Japanese folklor
 
 ## 繁體中文簡介
 
-QB Code 是九尾狐的 QR 碼產生器：九尾（きゅうび，kyū-bi）唸起來就是 Q·B。貼上網址，馬上得到中間有小狐狸、可以列印或分享的 QR 碼，並可下載 PNG 或 SVG。QR 編碼器完全自己實作，全部在瀏覽器裡計算，沒有後端伺服器，內容不會送到任何地方。小狐狸的大小由糾錯預算精確計算，不會讓 QR 碼讀不出來。
+QB Code 是九尾狐的 QR 碼產生器：九尾（きゅうび，kyū-bi）唸起來就是 Q·B，碼狸全開。貼上網址碼上就好，可以下載 PNG 或 SVG，要列印、要分享，有狐同享。QR 編碼器完全自己實作，全部在瀏覽器裡計算，沒有後端伺服器，內容不會送到任何地方。九尾狐佔多大由糾錯預算精確計算，照樣掃得出來，狸所當然。
 
 ## Features
 
@@ -82,18 +82,19 @@ One-time setup: in the repository's **Settings → Pages**, set **Source** to **
 
 ```
 site/
-  index.html       page markup
-  css/style.css    styles
-  js/qr.js         QR encoder (also loadable from Node)
-  js/payloads.js   URL payload builder
-  js/app.js        page logic: rendering, fox placement, downloads
-  assets/          fox picture and icons (not Apache-licensed, see below)
-tests/             node:test suites
-tools/             macOS Vision round-trip check
+  index.html            page markup and search/link-preview metadata
+  manifest.webmanifest  name and icons for adding the page to a home screen
+  css/style.css         styles
+  js/qr.js              QR encoder (also loadable from Node)
+  js/payloads.js        URL payload builder
+  js/app.js             page logic: rendering, fox placement, downloads
+  assets/               fox picture, icons and link-preview image (not Apache-licensed, see below)
+tests/                  node:test suites
+tools/                  macOS Vision round-trip check
 ```
 
 ## License
 
 The code is licensed under the [Apache License 2.0](LICENSE).
 
-The fox picture (`site/assets/fox.jpg`, `fox-64.png`, `fox-180.png`) and the README banner made from it (`.github/banner.png`) are **not** covered by that license. All rights are reserved, and they're included only so the official site and this README can show them. If you fork this project, replace those files with your own pictures. See [NOTICE](NOTICE).
+The fox picture and every image made from it (all files in `site/assets/`, and the README banner `.github/banner.png`) are **not** covered by that license. All rights are reserved, and they're included only so the official site and this README can show them. If you fork this project, replace those files with your own pictures. See [NOTICE](NOTICE).

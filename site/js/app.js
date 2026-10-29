@@ -124,7 +124,7 @@
     var host = slug(url.host);
     return {
       text: url.text,
-      missing: '輸入網址後，QR 碼會出現在這裡。',
+      missing: '貼上網址，QR 碼碼上出現在這裡。',
       alt: 'QR 碼，內容是 ' + url.text,
       filename: host ? 'qr-' + host : 'qr-code'
     };
@@ -241,17 +241,17 @@
   function planLogo(qr, bumpedFrom) {
     el.budget.hidden = false;
     if (!fox) {
-      setBudget(0, '–', foxFailed ? '小狐狸圖片載入失敗，這次先不放。' : '小狐狸載入中…', foxFailed ? 'warn' : '');
+      setBudget(0, '–', foxFailed ? '九尾狐圖片載入失敗，這次先不放。' : '九尾狐載入中…', foxFailed ? 'warn' : '');
       return null;
     }
     var fit = QR.fitLogo(qr, OUTPUT.logoSize / 100, LOGO_LIMIT);
     if (fit.blocked) {
-      setBudget(0, '放不下', '這個 QR 碼的修正能力不夠放小狐狸。為了讓它讀得出來，這次先不放。', 'warn');
+      setBudget(0, '放不下', '這個 QR 碼的修正能力不夠放九尾狐。為了讓它讀得出來，這次先不放。', 'warn');
       return null;
     }
     var note = '最吃緊的糾錯區塊被蓋掉 ' + fit.worst + ' 個碼字，最多能修 ' + fit.correctable + ' 個。';
-    if (bumpedFrom) note += '為了放下小狐狸，版本從 ' + bumpedFrom + ' 提高到 ' + qr.version + '。';
-    if (fit.side < fit.requested) note += '小狐狸縮到 ' + Math.round(fit.side / qr.size * 100) + '%，再大會超過安全上限。';
+    if (bumpedFrom) note += '為了放下九尾狐，版本從 ' + bumpedFrom + ' 提高到 ' + qr.version + '。';
+    if (fit.side < fit.requested) note += '九尾狐縮到 ' + Math.round(fit.side / qr.size * 100) + '%，再大會超過安全上限。';
     setBudget(fit.worst / fit.correctable, fit.worst + ' / ' + fit.correctable + ' 碼字', note);
     return { fit: fit, src: fox.src, img: fox.img };
   }
@@ -340,7 +340,7 @@
     current = { qr: qr, settings: s, filename: built.filename, logo: planLogo(qr, bumpedFrom) };
 
     el.image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgMarkup(qr, s, s.structure, current.logo));
-    el.image.alt = built.alt + (current.logo ? '，中間有圖案' : '');
+    el.image.alt = built.alt + (current.logo ? '，印著九尾狐' : '');
     el.image.hidden = false;
     el.placeholder.hidden = true;
     playScan(built.text + (current.logo ? '\u0000fox' : ''));
