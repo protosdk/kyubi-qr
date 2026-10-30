@@ -18,8 +18,9 @@ QB Code 是九尾狐的 QR 碼產生器：九尾（きゅうび，kyū-bi）唸�
 - **Fox in the centre**, sized so it uses at most 60% of the error correction (see below).
 - **Downloads**: PNG (about 1024 px) and SVG, plus copy-to-clipboard.
 - **Structure overlay** that colours the finder, timing and alignment patterns and the format and version information.
-- **Cyberpunk motion**: a neon flicker-on with an occasional glitch on the wordmark, a HUD ring around the fox, a drifting circuit grid, and a scan line with lock-on brackets for each new code. It all turns off when the system asks for reduced motion.
-- No server, no build step, no dependencies. The site is plain HTML, CSS and JavaScript.
+- **Cyberpunk motion**: a neon flicker-on with an occasional glitch on the wordmark, a HUD ring around the fox, a drifting circuit grid, and a scan line with lock-on brackets for each new code.
+- **Pixel motion** (`site/js/pixels.js`), drawn with [PixiJS](https://pixijs.com/) and [pixi-filters](https://github.com/pixijs/filters): pixelated fox-fire (狐火) with a neon bloom rising through the background, and signals running along the grid lines; the header fox on a little CRT screen that boots up from blocks and tears into glitched, colour-split slices along with the wordmark (and on hover); and each new code printing module by module just behind the scan line (a plain canvas, no PixiJS). None of it touches the exported PNG or SVG. PixiJS loads after the page, so the tool never waits for it; without WebGL the page keeps its CSS look, and with reduced motion PixiJS isn't loaded at all.
+- No server and no build step. The site is plain HTML, CSS and JavaScript; the only third-party code is PixiJS and pixi-filters, copied into `site/js/vendor/` and served from the site itself.
 
 ## How the fox stays readable
 
@@ -101,6 +102,8 @@ site/
   js/qr.js              QR encoder (also loadable from Node)
   js/payloads.js        URL payload builder
   js/app.js             page logic: rendering, fox placement, downloads
+  js/pixels.js          pixel-art motion: fox-fire, grid signals, CRT avatar, module-by-module print
+  js/vendor/            PixiJS 8.22.0 and pixi-filters 6.1.5 (MIT), unmodified, with their licences
   assets/               fox picture, icons and link-preview image (not Apache-licensed, see below)
 tests/                  node:test suites
 tools/                  macOS Vision round-trip check, font subset tool
@@ -109,5 +112,7 @@ tools/                  macOS Vision round-trip check, font subset tool
 ## License
 
 The code is licensed under the [Apache License 2.0](LICENSE).
+
+`site/js/vendor/` holds PixiJS and pixi-filters, each under its own MIT licence (the `LICENSE-*.txt` files next to them). They are the packages' `dist/pixi.min.js` and `dist/pixi-filters.js` from npm, unmodified. To update them, run `npm pack pixi.js@<version> pixi-filters@<version>`, copy those two files and the packages' `LICENSE` files over, and update the versions here and in [NOTICE](NOTICE).
 
 The fox picture and every image made from it (all files in `site/assets/`, and the README banner `.github/banner.png`) are **not** covered by that license. All rights are reserved, and they're included only so the official site and this README can show them. If you fork this project, replace those files with your own pictures. See [NOTICE](NOTICE).

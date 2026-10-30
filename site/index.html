@@ -60,10 +60,11 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<canvas id="pixel-sky" class="pixel-sky" aria-hidden="true"></canvas>
 <div class="page">
   <header class="masthead">
     <div class="brand">
-      <div class="avatar" aria-hidden="true"><img src="assets/fox-180.png" alt="QB Code 的藍色賽博九尾狐" width="64" height="64"></div>
+      <div class="avatar" aria-hidden="true"><img src="assets/fox-180.png" alt="QB Code 的藍色賽博九尾狐" width="64" height="64"><canvas></canvas></div>
       <div class="masthead-text">
         <p class="eyebrow">九尾 kyū·bi → Q·B</p>
         <h1 class="wordmark"><span class="glitch" data-text="QB">QB</span> Code</h1>
@@ -103,6 +104,7 @@
           <div class="screen">
             <img id="qr-image" alt="" hidden>
             <div id="qr-placeholder" class="placeholder">貼上網址，QR 碼碼上出現在這裡。</div>
+            <canvas id="pixel-veil" class="pixel-veil" aria-hidden="true" hidden></canvas>
             <span id="scanline" class="scanline" aria-hidden="true"></span>
           </div>
         </div>
@@ -183,6 +185,7 @@
 
 <script src="js/qr.js"></script>
 <script src="js/payloads.js"></script>
+<script src="js/pixels.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

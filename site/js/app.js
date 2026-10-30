@@ -266,13 +266,14 @@
     el.sticker.classList.remove('scanning');
   }
 
-  function playScan(key) {
+  function playScan(key, modules) {
     if (key === scanKey) return;
     scanKey = key;
     if (scanTimer) return;
     el.sticker.classList.remove('scanning');
     void el.sticker.offsetWidth; // restart the CSS animations
     el.sticker.classList.add('scanning');
+    if (window.Pixels) Pixels.scan(modules);
     // animationend never comes when motion is reduced or the tab is in the background.
     scanTimer = setTimeout(endScan, 1200);
   }
@@ -343,7 +344,7 @@
     el.image.alt = built.alt + (current.logo ? '，印著九尾狐' : '');
     el.image.hidden = false;
     el.placeholder.hidden = true;
-    playScan(built.text + (current.logo ? '\u0000fox' : ''));
+    playScan(built.text + (current.logo ? '\u0000fox' : ''), qr.size + s.margin * 2);
     setStatus('已編碼 · ' + qr.version + '-' + s.level, 'live');
     [el.savePng, el.saveSvg, el.copyPng].forEach(function (b) { b.disabled = false; });
 
