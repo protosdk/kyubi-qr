@@ -65,10 +65,15 @@ body::before {
 
 .avatar { position: relative; flex: none; width: 92px; height: 92px; display: grid; place-items: center; }
 .avatar img { width: 72px; height: 72px; border-radius: 50%; display: block; box-shadow: 0 0 22px var(--cyan-wash); }
-.avatar::before, .avatar::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+/* The HUD ring turns clockwise, so each arc fades in behind and has a soft front edge: the turn reads as a sweep
+   rather than three blocks stepping round. Both rings sit on their own GPU layer. */
+.avatar::before, .avatar::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; will-change: transform; }
 .avatar::before {
   inset: 0;
-  background: conic-gradient(var(--cyan) 0 16%, transparent 16% 30%, var(--trace) 30% 44%, transparent 44% 62%, var(--cyan) 62% 68%, transparent 68%);
+  background: conic-gradient(
+    transparent 0, var(--cyan) 10% 26%, transparent 26.6% 34%,
+    var(--trace) 40% 54%, transparent 54.6% 66%,
+    var(--cyan) 72% 78%, transparent 78.6%);
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
           mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
   filter: drop-shadow(0 0 4px var(--cyan));
